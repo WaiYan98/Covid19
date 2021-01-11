@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/medium_img_size"
+        android:layout_height="@dimen/medium_img_size"
+        android:src="@drawable/ic_coronavirus"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VERSION :1.0.0"
+        android:textColor="@color/white"
+        android:textSize="@dimen/small_txt_size"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Coronavirus Pandemic App"
+        android:textColor="@color/white"
+        android:textSize="@dimen/small_txt_size"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The data in this app is taken from https://disease.sh/"
+        android:textColor="@color/white"
+        android:textSize="@dimen/smallest_txt_size"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developed by Wai Yan Tun(wyh.waiyan98@mail.com)"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:textSize="@dimen/smallest_txt_size" />
+
+</LinearLayout>

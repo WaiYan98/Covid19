@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="large_txt_size">64sp</dimen>
+    <dimen name="medium_txt_size">40sp</dimen>
+    <dimen name="small_txt_size">32sp</dimen>
+    <dimen name="smallest_txt_size">24sp</dimen>
+    <dimen name="small_img_size">32dp</dimen>
+    <dimen name="large_img_size">200dp</dimen>
+    <dimen name="medium_img_size">200dp</dimen>
+
+</resources>

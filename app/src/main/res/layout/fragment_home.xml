@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:background="@drawable/bottom_rounded_rectangle"
+        android:elevation="8dp">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="16dp">
+
+            <ImageView
+                android:layout_width="@dimen/small_img_size"
+                android:layout_height="@dimen/small_img_size"
+                android:src="@drawable/ic_coronavirus__1_" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Stay Home,"
+                android:textColor="@color/white"
+                android:textSize="@dimen/medium_txt_size"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingEnd="16dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="Stay Safe   "
+                android:textColor="@color/white"
+                android:textSize="@dimen/medium_txt_size"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="@dimen/small_img_size"
+                android:layout_height="@dimen/small_img_size"
+                android:src="@drawable/ic_coronavirus__1_" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/large_img_size"
+            android:layout_height="@dimen/large_img_size"
+            android:layout_gravity="center_horizontal|bottom"
+            android:src="@drawable/ic_face_mask" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recy_covid19_total_cases"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</LinearLayout>

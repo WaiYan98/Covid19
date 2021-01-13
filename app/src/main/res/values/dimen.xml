@@ -7,5 +7,6 @@
     <dimen name="smallest_txt_size">16sp</dimen>
     <dimen name="small_img_size">24dp</dimen>
     <dimen name="large_img_size">200dp</dimen>
+    <dimen name="medium_img_size">120dp</dimen>
 
 </resources>

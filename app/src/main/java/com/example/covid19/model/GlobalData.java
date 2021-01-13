@@ -1,6 +1,9 @@
 package com.example.covid19.model;
 
-public class GlobalData {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class GlobalData implements Parcelable {
 
     private String nameCases;
     private int Cases;
@@ -77,4 +80,41 @@ public class GlobalData {
                 ", recovered=" + recovered +
                 '}';
     }
+
+    protected GlobalData(Parcel in) {
+        nameCases = in.readString();
+        Cases = in.readInt();
+        nameDeaths = in.readString();
+        deaths = in.readInt();
+        nameRecovered = in.readString();
+        recovered = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nameCases);
+        dest.writeInt(Cases);
+        dest.writeString(nameDeaths);
+        dest.writeInt(deaths);
+        dest.writeString(nameRecovered);
+        dest.writeInt(recovered);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<GlobalData> CREATOR = new Parcelable.Creator<GlobalData>() {
+        @Override
+        public GlobalData createFromParcel(Parcel in) {
+            return new GlobalData(in);
+        }
+
+        @Override
+        public GlobalData[] newArray(int size) {
+            return new GlobalData[size];
+        }
+    };
 }

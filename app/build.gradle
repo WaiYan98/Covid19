@@ -16,6 +16,15 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file('license.jks')
+            storePassword 'pass123'
+            keyAlias 'wai'
+            keyPassword 'pass123'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,6 +35,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {

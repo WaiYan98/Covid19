@@ -13,10 +13,19 @@ import com.example.covid19.R;
 
 public class InfoFragment extends Fragment {
 
+    private InfoFragment() {
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         return view;
+    }
+
+    public static InfoFragment getNewInstance() {
+        InfoFragment infoFragment = new InfoFragment();
+        return infoFragment;
     }
 }

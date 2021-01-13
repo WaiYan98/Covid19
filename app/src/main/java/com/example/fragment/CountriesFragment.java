@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +31,7 @@ import com.example.covid19.adapter.Covid19CaseCountryListAdapter;
 import com.example.covid19.model.Covid19;
 import com.example.covid19.util.VerticalSpaceItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -35,20 +40,27 @@ import butterknife.ButterKnife;
 
 public class CountriesFragment extends Fragment {
 
+    public static final String EXTRA_COVID19 = "EXTRA_COVID19";
+
     private List<Covid19> covid19List;
     private Covid19CaseCountryListAdapter.CallBack callBack;
     private CallBack callBackCf;
 
-    public CountriesFragment(List<Covid19> covid19List, Covid19CaseCountryListAdapter.CallBack callBack, CallBack callBackCf) {
-        this.covid19List = covid19List;
-        this.callBack = callBack;
-        this.callBackCf = callBackCf;
+    private CountriesFragment() {
     }
 
     @BindView(R.id.auto_complete_text_view)
     AutoCompleteTextView autoCompleteTextView;
     @BindView(R.id.recy_covid19_case_country_list)
     RecyclerView recyCovid19CaseCountryList;
+
+    public void setCallBack(Covid19CaseCountryListAdapter.CallBack callBack) {
+        this.callBack = callBack;
+    }
+
+    public void setCallBackCf(CallBack callBackCf) {
+        this.callBackCf = callBackCf;
+    }
 
     @Nullable
     @Override
@@ -61,6 +73,12 @@ public class CountriesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Bundle bundle = getArguments();
+
+        if (bundle != null) {
+            covid19List = bundle.getParcelableArrayList(EXTRA_COVID19);
+        }
 
         Covid19CaseCountryListAdapter covid19CaseCountryListAdapter = new Covid19CaseCountryListAdapter(getContext(), covid19List);
         covid19CaseCountryListAdapter.setCallBack(callBack);
@@ -76,9 +94,26 @@ public class CountriesFragment extends Fragment {
             callBackCf.onClickSearch(covid19);
         });
 
+        autoCompleteTextView.setOnEditorActionListener((v, actionId, event) -> {
 
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
-                recyCovid19CaseCountryList.setAdapter(covid19CaseCountryListAdapter);
+                Covid19 covid19 = searchCountry(covid19List, v.getText().toString());
+
+                if (covid19 != null) {
+
+                    callBackCf.onClickSearch(covid19);
+                } else {
+
+                    Toast.makeText(getContext(), "Invalid Search", Toast.LENGTH_LONG).show();
+                }
+
+            }
+
+            return false;
+        });
+
+        recyCovid19CaseCountryList.setAdapter(covid19CaseCountryListAdapter);
         recyCovid19CaseCountryList.setLayoutManager(new LinearLayoutManager(getContext()));
         recyCovid19CaseCountryList.addItemDecoration(new VerticalSpaceItemDecoration(8));
     }
@@ -96,9 +131,6 @@ public class CountriesFragment extends Fragment {
         return null;
     }
 
-    public interface CallBack {
-        void onClickSearch(Covid19 covid19);
-    }
 
     public String[] getCountriesNameArray(List<Covid19> covid19List) {
 
@@ -110,5 +142,17 @@ public class CountriesFragment extends Fragment {
         }
 
         return countriesNameArray;
+    }
+
+    public static CountriesFragment getNewInstance(String key, List<Covid19> covid19List) {
+        CountriesFragment cf = new CountriesFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(key, new ArrayList<>(covid19List));
+        cf.setArguments(bundle);
+        return cf;
+    }
+
+    public interface CallBack {
+        void onClickSearch(Covid19 covid19);
     }
 }

@@ -34,9 +34,12 @@ public class Covid19PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        HomeFragment hf = new HomeFragment(globalDataList);
-        CountriesFragment cf = new CountriesFragment(covid19List, callBack, callBackCf);
-        InfoFragment infoF = new InfoFragment();
+        HomeFragment hf = HomeFragment.getNewInstance(HomeFragment.EXTRA_GLOBAL_DATA, globalDataList);
+        CountriesFragment cf = CountriesFragment.getNewInstance(CountriesFragment.EXTRA_COVID19, covid19List);
+        InfoFragment infoF = InfoFragment.getNewInstance();
+
+        cf.setCallBack(callBack);
+        cf.setCallBackCf(callBackCf);
 
         switch (position) {
             case 0:

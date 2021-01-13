@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity implements Covid19CaseCountr
 
     }
 
-    public void goToCountryDetailActivity(Covid19 covid19) {
+    public void goToCountryDetailActivity(String key, Covid19 covid19) {
         Intent intent = new Intent(this, CountryDetailActivity.class);
-        intent.putExtra(CountryDetailActivity.EXTRA_COVID_19_COUNTRY_DETAIL, covid19);
+        intent.putExtra(key, covid19);
         startActivity(intent);
     }
 
@@ -100,11 +100,11 @@ public class MainActivity extends AppCompatActivity implements Covid19CaseCountr
 
     @Override
     public void onClickDetail(Covid19 currentCountryCovid19data) {
-        goToCountryDetailActivity(currentCountryCovid19data);
+        goToCountryDetailActivity(CountryDetailActivity.EXTRA_COVID_19_COUNTRY_DETAIL, currentCountryCovid19data);
     }
 
     @Override
     public void onClickSearch(Covid19 covid19) {
-        goToCountryDetailActivity(covid19);
+        goToCountryDetailActivity(CountryDetailActivity.EXTRA_COVID_19_COUNTRY_DETAIL, covid19);
     }
 }

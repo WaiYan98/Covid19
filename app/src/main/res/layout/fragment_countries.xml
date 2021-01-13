@@ -15,7 +15,9 @@
         android:background="@drawable/rounded_black_rectangle"
         android:hint="Search Countries"
         android:gravity="center_vertical"
-        android:completionThreshold="1"/>
+        android:completionThreshold="1"
+        android:imeOptions="actionSearch"
+        android:singleLine="true"/>
 
     <LinearLayout
         android:layout_width="match_parent"

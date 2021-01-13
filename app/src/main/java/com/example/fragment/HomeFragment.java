@@ -20,6 +20,7 @@ import com.example.covid19.model.GlobalCovid19;
 import com.example.covid19.model.GlobalData;
 import com.example.covid19.util.HorizontalSpaceItemDecoration;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,10 +28,12 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends Fragment {
 
+    public static final String EXTRA_GLOBAL_DATA = "EXTRA_GLOBAL_DATA";
+
     private List<GlobalData> globalDataList;
 
-    public HomeFragment(List<GlobalData> globalDataList) {
-        this.globalDataList = globalDataList;
+    private HomeFragment() {
+
     }
 
     @BindView(R.id.recy_covid19_total_cases)
@@ -48,11 +51,25 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Bundle bundle = getArguments();
+
+        if (bundle != null) {
+            globalDataList = bundle.getParcelableArrayList(EXTRA_GLOBAL_DATA);
+        }
+
 
         recyCovid19TotalCases.setAdapter(new Covid19TotalCasesInWorldAdapter(globalDataList));
         recyCovid19TotalCases.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         recyCovid19TotalCases.addItemDecoration(new HorizontalSpaceItemDecoration(20));
 
+    }
+
+    public static HomeFragment getNewInstance(String key, List<GlobalData> globalDataList) {
+        HomeFragment hf = new HomeFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList(key, new ArrayList<>(globalDataList));
+        hf.setArguments(bundle);
+        return hf;
     }
 
 }
